@@ -1,4 +1,5 @@
 const userModel = require("../models/user.model");
+const blacklisttokenModel = require('../models/blacklisttoken.model');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -21,7 +22,9 @@ module.exports.registerUser = async (req, res) => {
     });
     res.cookie("token", token);
 
-    res.send({ message: "User registered successfully" });
+    delete newUser._doc.password;
+
+    res.send({ token, user: newUser });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
