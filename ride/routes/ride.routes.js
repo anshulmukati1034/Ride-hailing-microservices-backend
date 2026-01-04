@@ -5,8 +5,7 @@ const authMiddleware = require('../middleware/auth.middleware');
 
 
 router.post('/create-rides', authMiddleware.userAuth, rideController.createRide);
-
-
+router.put('/accept-ride',authMiddleware.captainAuth, rideController.acceptRide)
 
 
 
